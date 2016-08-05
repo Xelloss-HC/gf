@@ -16,29 +16,23 @@
 				h: 0x0
 			},
 			a = sel.parents();
-		if (n.w = sel.innerWidth() * o, n.h = sel.innerHeight() * o, a.is(document.body)) for (var s = sel; s[0x0] != document.body; s = s.parent()) e = s.position(), n.y = n.y + e.top * o, n.x = n.x + e.left * o;
+		if (n.w = sel.innerWidth() * o, n.h = sel.innerHeight() * o, a.is(document.body))
+			for (var s = sel; s[0x0] != document.body; s = s.parent()) e = s.position(), n.y = n.y + e.top * o, n.x = n.x + e.left * o;
 		return n
 	}
 	,tp = function(sel) {
 		var btninfo = bi(sel),
+			btn = $(sel);
 			tx = Math.round(btninfo.x + Math.random() * btninfo.w),
 			ty = Math.round(btninfo.y + Math.random() * btninfo.h),
-			up = new MouseEvent('mouseup', {
+			tpe = new MouseEvent('tap', {
 				view: window,
 				bubbles: true,
 				clientX: tx,
 				clientY: ty,
 				cancelable: true
 			}),
-			dn = new MouseEvent('mousedown', {
-				view: window,
-				bubbles: true,
-				clientX: tx,
-				clientY: ty,
-				cancelable: true
-			}),
-			btn = $(sel);
-		false != btn.length && (btn[0].dispatchEvent(dn), btn[0].dispatchEvent(up))
+		false != btn.length && btn[0].dispatchEvent(tpe)
 	}
 	,tz = function(sel){var _=$('div',sel),__=_.size()-1,___=0;_.each(function(i,____){___+=~~____.className.split('_')[1]*Math.pow(10,__-i)});return ___}
 	,ce = function(en){$('#canv').trigger(en)}
@@ -285,7 +279,7 @@
 			}
 			var slt=av.模式设定[md.pf].点击动作延迟几秒+Math.random()*av.模式设定[md.pf].随机增加的延迟秒数;
 			sout('Relax! 我只睡'+Math.round(slt*10)/10+'秒',2);
-			$('.btn-usual-ok:visible').trigger('tap');
+			// $('.btn-usual-ok:visible').trigger('tap');
 			za=setTimeout(caf,slt*1000)
 		},
 		deck:function(){
