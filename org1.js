@@ -4,9 +4,42 @@
 	,et = 'ontouchstart' in window ? 'touchstart' : 'mousedown'
 	,md = {ver:1,pf:0,st1:null,st2:null}
 	,nl = '\n'
-	,zc = ['color:#000000','color:#307730','color:#AAAAAA','color:white; background-color:#77A8F3','color:white; background-color:#0055CC','color:white; background-color:#B03939']
+	,zc = ['color:#000000','color:#307730','color:#AAAAAA','color:white; background-color:#77A8F3','color:white; background-color:#0055CC','color:white; background-color:#B03939'],
 	,sout = function(inf,sty){if(!av.是否在控制台输出信息){sout=function(){};return}console.info('%c'+inf,zc[~~sty])}
-	,tp = function(sel){$(sel).trigger('tap')}
+	,bi = function(sel) {
+		sel = $(sel);
+		var e, o = $(document.documentElement).css('zoom'),
+			n = {
+				x: 0x0,
+				y: 0x0,
+				w: 0x0,
+				h: 0x0
+			},
+			a = sel.parents();
+		if (n.w = sel.innerWidth() * o, n.h = sel.innerHeight() * o, a.is(document.body)) for (var s = sel; s[0x0] != document.body; s = s.parent()) e = s.position(), n.y = n.y + e.top * o, n.x = n.x + e.left * o;
+		return n
+	}
+	,tp = function(sel) {
+		var btninfo = bi(sel),
+			tx = Math.round(btninfo.x + Math.random() * btninfo.w),
+			ty = Math.round(btninfo.y + Math.random() * btninfo.h),
+			up = new MouseEvent('mouseup', {
+				view: window,
+				bubbles: true,
+				clientX: tx,
+				clientY: ty,
+				cancelable: true
+			}),
+			dn = new MouseEvent('mousedown', {
+				view: window,
+				bubbles: true,
+				clientX: tx,
+				clientY: ty,
+				cancelable: true
+			}),
+			btn = $(sel);
+		false != btn.length && (btn[0].dispatchEvent(dn), btn[0].dispatchEvent(up))
+	}
 	,tz = function(sel){var _=$('div',sel),__=_.size()-1,___=0;_.each(function(i,____){___+=~~____.className.split('_')[1]*Math.pow(10,__-i)});return ___}
 	,ce = function(en){$('#canv').trigger(en)}
 	,ce2 = function(b){exportRoot["card_" + b + "_select"]=1}
