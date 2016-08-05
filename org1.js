@@ -4,7 +4,7 @@
 	,et = 'ontouchstart' in window ? 'touchstart' : 'mousedown'
 	,md = {ver:1,pf:0,st1:null,st2:null}
 	,nl = '\n'
-	,zc = ['color:#000000','color:#307730','color:#AAAAAA','color:white; background-color:#77A8F3','color:white; background-color:#0055CC','color:white; background-color:#B03939'],
+	,zc = ['color:#000000','color:#307730','color:#AAAAAA','color:white; background-color:#77A8F3','color:white; background-color:#0055CC','color:white; background-color:#B03939']
 	,sout = function(inf,sty){if(!av.是否在控制台输出信息){sout=function(){};return}console.info('%c'+inf,zc[~~sty])}
 	,bi = function(sel) {
 		sel = $(sel);
