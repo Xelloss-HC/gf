@@ -6,6 +6,13 @@
 	,nl = '\n'
 	,zc = ['color:#000000','color:#307730','color:#AAAAAA','color:white; background-color:#77A8F3','color:white; background-color:#0055CC','color:white; background-color:#B03939']
 	,sout = function(inf,sty){if(!av.是否在控制台输出信息){sout=function(){};return}console.info('%c'+inf,zc[~~sty])}
+	,sleep = function(a) {
+		return new Promise(function(b) {
+			setTimeout(function() {
+				b()
+			}, 1000 * a)
+		}.bind(this))
+	}
 	,bi = function(sel) {
 		sel = $(sel);
 		var e, o = $(document.documentElement).css('zoom'),
@@ -22,9 +29,24 @@
 	}
 	,tp = function(sel) {
 		var btninfo = bi(sel),
-			btn = $(sel);
+			btn = $(sel),
 			tx = Math.round(btninfo.x + Math.random() * btninfo.w),
 			ty = Math.round(btninfo.y + Math.random() * btninfo.h),
+			eventPro = {
+				view: window,
+				bubbles: true,
+				clientX: tx,
+				clientY: ty,
+				offsetX: tx,
+				offsetY: ty,
+				pageX: tx,
+				pageY: ty,
+				screenX: tx + 50,
+				screenY: ty,
+				cancelable: true,
+				x: tx,
+				y: ty
+			},
 			tpe = new MouseEvent('tap', {
 				view: window,
 				bubbles: true,
@@ -32,7 +54,18 @@
 				clientY: ty,
 				cancelable: true
 			}),
-		false != btn.length && btn[0].dispatchEvent(tpe)
+			oevd = new MouseEvent("mousedown"),
+			oevu = new MouseEvent("mouseup"),
+			evd = $.Event(oevd, eventPro),
+			evu = $.Event(oevu, eventPro);
+
+		sleep(0.01).then(function() {
+			button.trigger(evd)
+		}.bind(this)).then(function() {
+			return this.sleep(0.01)
+		}.bind(this)).then(function() {
+			button.trigger(evu)
+		}.bind(this));
 	}
 	,tz = function(sel){var _=$('div',sel),__=_.size()-1,___=0;_.each(function(i,____){___+=~~____.className.split('_')[1]*Math.pow(10,__-i)});return ___}
 	,ce = function(en){$('#canv').trigger(en)}
