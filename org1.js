@@ -62,7 +62,7 @@
 		sleep(0.01).then(function() {
 			btn.trigger(evd)
 		}.bind(this)).then(function() {
-			return this.sleep(0.01)
+			return sleep(0.01)
 		}.bind(this)).then(function() {
 			btn.trigger(evu)
 		}.bind(this));
