@@ -60,11 +60,11 @@
 			evu = $.Event(oevu, eventPro);
 
 		sleep(0.01).then(function() {
-			button.trigger(evd)
+			btn.trigger(evd)
 		}.bind(this)).then(function() {
 			return this.sleep(0.01)
 		}.bind(this)).then(function() {
-			button.trigger(evu)
+			btn.trigger(evu)
 		}.bind(this));
 	}
 	,tz = function(sel){var _=$('div',sel),__=_.size()-1,___=0;_.each(function(i,____){___+=~~____.className.split('_')[1]*Math.pow(10,__-i)});return ___}
